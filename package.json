@@ -1,0 +1,19 @@
+{
+	"name": "pitaya",
+	"version": "0.0.1",
+	"description": "Javascript implementation of pitaya framework",
+	"main": "pitaya.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [
+		"Pitaya"
+	],
+	"dependencies": {
+		"uniqid": "^4.1.1",
+		"tiinytiny": ">=0.1.0"
+	},
+	"author": "JCloudYu",
+	"private": true,
+	"license": "UNLICENSED"
+}
