@@ -1,7 +1,7 @@
 (()=>{
 	"use strict";
 	module.exports = { chain:(config)=>{
-		const {_handler} = config;
+		const {handler:_handler} = config;
 		
 		if ( !_handler ) {
 			throw "Entry handler is not set!";
@@ -36,7 +36,7 @@
 				
 				function __LOOP_MODULE(result) {
 					// Stop promise chain if there's no more items in the module chaining queue
-					if ( queue.length === 0 ) { return null; }
+					if ( queue.length === 0 ) { return Promise.resolve(result); }
 				
 				
 				
