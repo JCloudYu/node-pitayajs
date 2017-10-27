@@ -1,7 +1,7 @@
 {
-	"name": "pitaya",
-	"version": "0.0.1",
-	"description": "Javascript implementation of pitaya framework",
+	"name": "pitayajs",
+	"version": "0.1.0",
+	"description": "",
 	"main": "pitaya.js",
 	"scripts": {
 		"test": "node ./test/test.js"
@@ -14,6 +14,5 @@
 		"tiinytiny": ">=0.1.0"
 	},
 	"author": "JCloudYu",
-	"private": true,
-	"license": "UNLICENSED"
+	"license": "WTFPL"
 }
