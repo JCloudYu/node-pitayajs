@@ -4,7 +4,7 @@
 	"description": "Javascript implementation of pitaya framework",
 	"main": "pitaya.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "node ./test/test.js"
 	},
 	"keywords": [
 		"Pitaya"
