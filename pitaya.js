@@ -1,21 +1,26 @@
 (()=>{
 	"use strict";
 	module.exports = { chain:(config)=>{
-		const {handler:_handler} = config;
-		
-		if ( !_handler ) {
+		if ( !config.handler ) {
 			throw "Entry handler is not set!";
 		}
 	
+	
+	
+		if ( !Array.isArray(config.handler) ) {
+			config.handler = [config.handler];
+		}
+		const {handler:_handler} = config;
+	
 		return {
 			init:function() {
-				return Promise.resolve().then(()=>{
-					if ( !_handler.init ) {
-						return;
-					}
-					
-					return _handler.init();
+				let promise = Promise.resolve();
+				_handler.forEach((handler)=>{
+					if ( !handler.init ) return;
+					promise = promise.then(handler.init);
 				});
+				
+				return promise;
 			},
 			trigger:function(env) {
 				// Prepare constant objects
@@ -26,7 +31,7 @@
 				
 				
 				// Prepare module chaining queue
-				let queue = [_handler];
+				let queue = _handler.slice(0);
 				return __LOOP_MODULE(null);
 				
 				
