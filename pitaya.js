@@ -24,9 +24,20 @@
 			},
 			trigger:function(env) {
 				// Prepare constant objects
-				let control = {next:null};
-				Object.defineProperty(control, 'env', {
-					value:env, writable:false, enumerable:true, configurable:false
+				let control = {next:null, shouldStop:false};
+				Object.defineProperties(control, {
+					env:{
+						value:env,
+						writable:false, enumerable:true, configurable:false
+					},
+					next:{
+						value:null,
+						writable:true, enumerable:true, configurable:false
+					},
+					stop:{
+						value:false,
+						writable:true, enumerable:true, configurable:false
+					},
 				});
 				
 				
@@ -41,7 +52,7 @@
 				
 				function __LOOP_MODULE(result) {
 					// Stop promise chain if there's no more items in the module chaining queue
-					if ( queue.length === 0 ) { return Promise.resolve(result); }
+					if ( queue.length === 0 || control.stop ) { return Promise.resolve(result); }
 				
 				
 				
