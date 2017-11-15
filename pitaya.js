@@ -1,6 +1,7 @@
 (()=>{
 	"use strict";
-	module.exports = { chain:(config)=>{
+	
+	const Pitaya = (config)=>{
 		if ( !config.handler ) {
 			throw "Entry handler is not set!";
 		}
@@ -78,5 +79,10 @@
 				}
 			}
 		};
-	}};
+	};
+	
+	
+	Pitaya.chain = Pitaya;
+	Pitaya.net	 = require( './ext/pitaya-net' );
+	module.exports = Pitaya;
 })();
