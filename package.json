@@ -1,6 +1,6 @@
 {
 	"name": "pitayajs",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "",
 	"main": "pitaya.js",
 	"scripts": {
@@ -10,7 +10,6 @@
 		"Pitaya"
 	],
 	"dependencies": {
-		"uniqid": "^4.1.1",
 		"tiinytiny": ">=0.1.0"
 	},
 	"author": "JCloudYu",
