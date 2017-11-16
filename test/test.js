@@ -1,7 +1,7 @@
 (()=>{
 	"use strict";
 	
-	const pitaya = require( '../pitaya' ).chain({handler:[
+	const pitaya = require( '../core/pitaya' ).chain({handler:[
 		(control, result)=>{
 			console.log( 0, result );
 			control.next = [

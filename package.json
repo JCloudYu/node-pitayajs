@@ -2,16 +2,14 @@
 	"name": "pitayajs",
 	"version": "1.2.2",
 	"description": "",
-	"main": "pitaya.js",
+	"main": "core/pitaya.js",
 	"scripts": {
 		"test": "node ./test/test.js"
 	},
 	"keywords": [
 		"Pitaya"
 	],
-	"dependencies": {
-		"tiinytiny": ">=0.1.0"
-	},
+	"dependencies": {},
 	"author": "JCloudYu",
 	"license": "WTFPL"
 }
