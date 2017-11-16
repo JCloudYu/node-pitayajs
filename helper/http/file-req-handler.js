@@ -60,7 +60,6 @@
 			headers[ 'Content-Type' ] = `${contentType}`;
 		}
 		
-		console.log(`${resRoot}${path}`);
 		res.writeHead(200, headers);
 		res.end();
 	}
