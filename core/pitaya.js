@@ -1,17 +1,23 @@
 (()=>{
 	"use strict";
 	
+	const BUILTIN_FIELDS = [ 'env', 'next', 'stop', 'handler' ];
 	const Pitaya = (config)=>{
-		if ( !config.handler ) {
+		config = config || {};
+	
+		let inputHandler = config.handler;
+		if ( !inputHandler ) {
 			throw "Entry handler is not set!";
 		}
 	
 	
 	
-		if ( !Array.isArray(config.handler) ) {
-			config.handler = [config.handler];
+		if ( !Array.isArray(inputHandler) ) {
+			inputHandler = [inputHandler];
 		}
-		const {handler:_handler} = config;
+		const _handler = inputHandler;
+	
+		
 	
 		return {
 			init:function() {
@@ -23,9 +29,9 @@
 				
 				return promise;
 			},
-			trigger:function(env) {
+			trigger:function(env, chainData=null) {
 				// Prepare constant objects
-				let control = {next:null, shouldStop:false};
+				let control = {};
 				Object.defineProperties(control, {
 					env:{
 						value:env,
@@ -40,11 +46,17 @@
 						writable:true, enumerable:true, configurable:false
 					},
 				});
+
+				Object.keys(config).forEach((key)=>{
+					if ( BUILTIN_FIELDS.indexOf(key) >= 0 ) return;
+					control[key] = config[key];
+				});
+				
 				
 				
 				// Prepare module chaining queue
 				let queue = _handler.slice(0);
-				return __LOOP_MODULE(null);
+				return __LOOP_MODULE(chainData);
 				
 				
 				
