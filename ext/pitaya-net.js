@@ -35,7 +35,7 @@
 			
 			return query;
 		},
-		HTTPPopulatePathComponent:(path)=>{
+		HTTPPullPathComp:(path)=>{
 			if ( typeof path === "string" ) {
 				path = {url:path, comp:''};
 			}
