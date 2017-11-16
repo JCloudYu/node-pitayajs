@@ -1,6 +1,6 @@
 {
 	"name": "pitayajs",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "",
 	"main": "core/pitaya.js",
 	"scripts": {
