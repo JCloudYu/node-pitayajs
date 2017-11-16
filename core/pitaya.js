@@ -1,3 +1,9 @@
+/**
+ * Project: pitayajs
+ * File: pitaya.js
+ * Author: JCloudYu
+ * Create Date: Nov. 17, 2017
+ */
 (()=>{
 	"use strict";
 	
