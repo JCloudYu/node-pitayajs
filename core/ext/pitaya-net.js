@@ -8,7 +8,7 @@
 	"use strict";
 	
 	const exports = {
-		StreamReadAll: (stream, doDrain=false)=>{
+		StreamReadAll: (stream, size_limit=0, doDrain=false)=>{
 			return new Promise((fulfill, reject)=>{
 				stream.on('error', reject );
 				
@@ -17,14 +17,29 @@
 					stream.resume();
 				}
 				else {
-					let buff = [];
+					let buff = [], length = 0;
 					stream.on('end', ()=>{ fulfill(Buffer.concat(buff)); buff = null; });
-					stream.on('data', (chunk)=>{ buff.push(chunk); });
+					stream.on('data', (chunk)=>{
+						length += chunk.length;
+						console.log(length, size_limit);
+						if ( size_limit <= 0 || size_limit >= length) {
+							buff.push(chunk);
+						}
+						else {
+							stream.pause();
+							buff.splice(0);
+							stream.removeAllListeners();
+							setTimeout(()=>{
+								stream.on( 'end', ()=>{ reject(new RangeError( "Client has uploaded data with too large size!" )) } );
+								stream.resume();
+							}, 0);
+						}
+					});
 				}
 			});
 		},
 		StreamDrain:(stream)=>{
-			return exports.StreamReadAll(stream, true);
+			return exports.StreamReadAll(stream, 0, true);
 		},
 		HTTPParseQuery:(queryStr, fullPath=true)=>{
 			queryStr = queryStr || '';
