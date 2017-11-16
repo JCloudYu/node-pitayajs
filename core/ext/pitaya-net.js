@@ -52,7 +52,8 @@
 			}
 			
 			let {comp, url} = path;
-			let limit = !fullPath ? url.length : url.indexOf( '?' );
+			let limit = !fullPath ? -1 : url.indexOf( '?' );
+			limit = (limit < 0) ? url.length : limit;
 			
 			let divider = url.indexOf('/', 1);
 			if ( divider >= 0 && divider < limit ) {
