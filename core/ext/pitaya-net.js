@@ -21,7 +21,6 @@
 					stream.on('end', ()=>{ fulfill(Buffer.concat(buff)); buff = null; });
 					stream.on('data', (chunk)=>{
 						length += chunk.length;
-						console.log(length, size_limit);
 						if ( size_limit <= 0 || size_limit >= length) {
 							buff.push(chunk);
 						}
