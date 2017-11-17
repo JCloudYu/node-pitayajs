@@ -61,11 +61,11 @@
 			return query;
 		},
 		HTTPPullPathComp:(path, fullPath=true)=>{
-			if ( typeof path === "string" ) {
-				path = {url:path, comp:''};
+			if ( Object(path) !== path ) {
+				path = {url:''+path, comp:''};
 			}
 			
-			let {comp, url} = path;
+			let {comp='', url=''} = path;
 			let limit = !fullPath ? -1 : url.indexOf( '?' );
 			limit = (limit < 0) ? url.length : limit;
 			
