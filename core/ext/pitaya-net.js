@@ -80,7 +80,8 @@
 			}
 			
 			return {url:url, comp:comp};
-		}
+		},
+		HTTPCookie: require('./pitaya-net-cookie')
 	};
 	
 	module.exports = exports;
