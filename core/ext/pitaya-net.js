@@ -4,10 +4,26 @@
  * Author: JCloudYu
  * Create Date: Nov. 17, 2017
  */
+
+/**
+ * Network supportive functions
+ * @module ext/pitaya-net
+ */
 (()=>{
 	"use strict";
 	
+	/**
+	 * @namespace PitayaNetHelper
+	 */
 	const exports = {
+		/**
+		 * Read all string into buffer
+		 * @async
+		 * @param {stream.Readable} stream The source stream
+		 * @param {Number} size_limit The max size of data to be read from stream
+		 * @param {Boolean} doDrain Whether to drain input instead of read contents
+		 * @returns {Promise<Buffer>}
+		 */
 		StreamReadAll: (stream, size_limit=0, doDrain=false)=>{
 			return new Promise((fulfill, reject)=>{
 				stream.on('error', reject );
@@ -37,9 +53,23 @@
 				}
 			});
 		},
+		
+		/**
+		 * Read and discard all data from given stream
+		 * @async
+		 * @param {stream.Readable} stream
+		 * @returns {Promise}
+		 */
 		StreamDrain:(stream)=>{
 			return exports.StreamReadAll(stream, 0, true);
 		},
+		
+		/**
+		 * Parse given query string and divide the content into variables and flags.
+		 * @param {String} queryStr The string to be parsed
+		 * @param {Boolean} fullPath Whether the string contains the path part
+		 * @returns {{var: {}, flag:String[]}}
+		 */
 		HTTPParseQuery:(queryStr, fullPath=true)=>{
 			queryStr = queryStr || '';
 			let query = {var:{}, flag:[]};
@@ -60,6 +90,13 @@
 			
 			return query;
 		},
+		
+		/**
+		 * Extract a path component from the given string
+		 * @param {String|{url:String,[comp]:String}} path The path to be extracted from
+		 * @param {Boolean} fullPath Whether the string contains query part
+		 * @returns {{url:String, comp:String}}
+		 */
 		HTTPPullPathComp:(path, fullPath=true)=>{
 			if ( Object(path) !== path ) {
 				path = {url:''+path, comp:''};
@@ -81,6 +118,10 @@
 			
 			return {url:url, comp:comp};
 		},
+		
+		/**
+		 * @type PitayaNetCookieHelper
+		 */
 		HTTPCookie: require('./pitaya-net-cookie')
 	};
 	

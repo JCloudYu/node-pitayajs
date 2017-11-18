@@ -102,5 +102,12 @@
 	
 	Pitaya.chain = Pitaya;
 	Pitaya.net	 = require( './ext/pitaya-net' );
+	
+	/**
+	 * @typedef {{
+	 * 		chain:Function(*=),
+	 * 		net:PitayaNetHelper
+	 * }} pitaya
+	 */
 	module.exports = Pitaya;
 })();
