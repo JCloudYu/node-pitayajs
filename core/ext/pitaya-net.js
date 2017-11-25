@@ -95,29 +95,10 @@
 		 * Extract a path component from the given string
 		 * @param {String|{url:String,[comp]:String}} path The path to be extracted from
 		 * @param {Boolean} fullPath Whether the string contains query part
+		 * @param {String} separator The token that divides the components
 		 * @returns {{url:String, comp:String}}
 		 */
-		HTTPPullPathComp:(path, fullPath=true)=>{
-			if ( Object(path) !== path ) {
-				path = {url:''+path, comp:''};
-			}
-			
-			let {comp='', url=''} = path;
-			let limit = !fullPath ? -1 : url.indexOf( '?' );
-			limit = (limit < 0) ? url.length : limit;
-			
-			let divider = url.indexOf('/', 1);
-			if ( divider >= 0 && divider < limit ) {
-				comp = url.substring(0,divider);
-				url  = url.substring(divider);
-			}
-			else {
-				comp = url;
-				url	 = '';
-			}
-			
-			return {url:url, comp:comp};
-		},
+		HTTPPullPathComp:__DIVIDE_AND_PULL,
 		
 		/**
 		 * @type PitayaNetCookieHelper
@@ -126,5 +107,37 @@
 	};
 	
 	module.exports = exports;
+	
+	
+	
+	/**
+	 * Extract a path component from the given string
+	 * @private
+	 * @param {String|{url:String,[comp]:String}} path The path to be extracted from
+	 * @param {Boolean} fullPath Whether the string contains query part
+	 * @param {String} separator The token that divides the components
+	 * @returns {{url:String, comp:String}}
+	 */
+	function __DIVIDE_AND_PULL(path, fullPath=true, separator='/') {
+		if ( Object(path) !== path ) {
+			path = {url:''+path, comp:''};
+		}
+		
+		let {comp='', url=''} = path;
+		let limit = !fullPath ? -1 : url.indexOf( '?' );
+		limit = (limit < 0) ? url.length : limit;
+		
+		let divider = url.indexOf(separator, 1);
+		if ( divider >= 0 && divider < limit ) {
+			comp = url.substring(0,divider);
+			url  = url.substring(divider);
+		}
+		else {
+			comp = url;
+			url	 = '';
+		}
+		
+		return {url:url, comp:comp};
+	}
 })();
 
