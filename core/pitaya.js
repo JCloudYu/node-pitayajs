@@ -102,11 +102,13 @@
 	
 	Pitaya.chain = Pitaya;
 	Pitaya.net	 = require( './ext/pitaya-net' );
+	Pitaya.misc	 = require( './ext/pitaya-misc' );
 	
 	/**
 	 * @typedef {{
 	 * 		chain:Function(*=),
-	 * 		net:PitayaNetHelper
+	 * 		net:PitayaNetHelper,
+	 * 		misc:PitayaMiscHelper
 	 * }} pitaya
 	 */
 	module.exports = Pitaya;
