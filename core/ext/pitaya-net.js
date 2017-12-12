@@ -134,10 +134,10 @@
 		}
 		else {
 			comp = url;
-			url	 = '';
+			url	 = null;
 		}
 		
-		return {url:url, comp:comp};
+		return {url, comp};
 	}
 })();
 
